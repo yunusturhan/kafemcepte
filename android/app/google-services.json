@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "213001657050",
+    "project_id": "kafemcepte-50d70",
+    "storage_bucket": "kafemcepte-50d70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213001657050:android:1a6a196e6e10defeba23e3",
+        "android_client_info": {
+          "package_name": "com.example.kafemcepte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213001657050-nrhjhd74ub2op5or6qcq60bajaunp1b5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kafemcepte",
+            "certificate_hash": "6da3b51e8cafb37b7c42ff82e46efa6ac58f6cca"
+          }
+        },
+        {
+          "client_id": "213001657050-eunj95rufnpk3f1em6cdcls5328gu2rg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiHP8JK9k443A_iZPi99Rra6asuH_SGAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213001657050-eunj95rufnpk3f1em6cdcls5328gu2rg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
