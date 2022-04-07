@@ -41,9 +41,149 @@ class _AnasayfaState extends State<Anasayfa> {
       actions: [
         Container()
       ]),
+
       body:Center(
         child: Column(children: [
-          StreamBuilder(
+          Container(padding: EdgeInsets.all(5),
+            child: Column(
+              children: [
+                Row(crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap:() => print("pizza"),
+                      child: Container(margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green
+                        ),
+                        width: 100,
+                        height: 100,
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/pizza.png",width: MediaQuery.of(context).size.height*0.08,height:MediaQuery.of(context).size.height*0.08,),
+                            Text("Pizzalar"),
+                          ],
+                        )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap:() => print("Makarna"),
+                      child: Container(margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green
+                        ),
+                        width: 100,
+                        height: 100,
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/makarna.png",width: MediaQuery.of(context).size.height*0.08,height:MediaQuery.of(context).size.height*0.08,),
+                            Text("Makarnalar"),
+                          ],
+                        )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap:() => print("sadf"),
+                      child: Container(margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green
+                        ),
+                        width: 100,
+                        height: 100,
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/hamburger.png",width: MediaQuery.of(context).size.height*0.08,height:MediaQuery.of(context).size.height*0.08,),
+                            Text("Hamburgerler"),
+                          ],
+                        ),),
+                      ),
+                    ),
+                  ],
+                ),//1.satir
+
+
+                Row(crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap:() => print("pizza"),
+                      child: Container(margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green
+                        ),
+                        width: 100,
+                        height: 100,
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/pizza.png",width: MediaQuery.of(context).size.height*0.08,height:MediaQuery.of(context).size.height*0.08,),
+                            Text("Pizzalar"),
+                          ],
+                        )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap:() => print("Makarna"),
+                      child: Container(margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green
+                        ),
+                        width: 100,
+                        height: 100,
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/corba.png",width: MediaQuery.of(context).size.height*0.08,height:MediaQuery.of(context).size.height*0.08,),
+                            Text("Çorbalar"),
+                          ],
+                        )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap:() => print("sadf"),
+                      child: Container(margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green
+                        ),
+                        width: 100,
+                        height: 100,
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/tatli.png",width: MediaQuery.of(context).size.height*0.08,height:MediaQuery.of(context).size.height*0.08,),
+                            Text("Tatlılar"),
+                          ],
+                        ),),
+                      ),
+                    ),
+                  ],
+                ),// 2.satır
+
+              ],
+            ),
+          )
+
+
+
+
+
+
+         /* StreamBuilder(
               stream: yiyeceklerlerRef.snapshots(),
               builder: (BuildContext context, AsyncSnapshot asyncSnapshot){
                 try{
@@ -52,7 +192,7 @@ class _AnasayfaState extends State<Anasayfa> {
                       Flexible(child: ListView.builder(itemCount: okunanSnapshot.length,
                           itemBuilder:(context,index){
                         return Container(
-                          height: 250,
+                          height: 150,
                           width: 400,
                           decoration: BoxDecoration(
                               border: Border.all(
@@ -74,8 +214,8 @@ class _AnasayfaState extends State<Anasayfa> {
                                 children: [
                                   //Image.network(src).,
                                   Container(
-                                    height: 150,
-                                    width: 150,
+                                    height: 100,
+                                    width: 100,
                                     decoration: BoxDecoration(
                                         border: Border.all(width: 1),
                                         borderRadius: BorderRadius.all(
@@ -86,9 +226,17 @@ class _AnasayfaState extends State<Anasayfa> {
                                       child: Image.network('${okunanSnapshot[index].get("resim")}',fit: BoxFit.cover),
                                     ),
                                   ),
+                                  for(int i=0;i<10;i++)
+                                    Container(),
+
                                   if(okunanSnapshot[index].get("stok_durumu")==false)
-                                  Icon(Icons.cancel_rounded,color: Colors.red,size: 48,)
-                                  else Text(okunanSnapshot[index].get("fiyat").toString())
+                                  Row(
+                                    children: [
+                                      Icon(Icons.cancel_rounded,color: Colors.red,size: 48,),
+                                      Text("Bu ürün tükendi.",style: TextStyle(fontSize: 20),),
+                                    ],
+                                  )
+                                  else Text("${okunanSnapshot[index].get("fiyat").toString()} ₺",style: TextStyle(fontSize: 24),)
 
                                 ],
                               ),
@@ -105,9 +253,13 @@ class _AnasayfaState extends State<Anasayfa> {
                   print(e);
                   return Center(child: LinearProgressIndicator(),);
                 }
-              }   )
+              }   ),
+
+*/
+
         ],)
       ),
+
       endDrawer: MyDrawer(),
     );
   }

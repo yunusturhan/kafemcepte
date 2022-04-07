@@ -18,7 +18,7 @@ class YiyecekEkleService{
     }else{
       mediaUrl=await _storageService.resimYukleme(File(pickedFile.path));
     }
-    documentRef= await ref.add({'isim': isim,'kategori':kategori,'stok_durumu':stok_durumu,'gluten_durumu':gluten_durumu, 'resim': mediaUrl,});
+    documentRef= await ref.add({'isim': isim,'kategori':kategori,'stok_durumu':stok_durumu,'gluten_durumu':gluten_durumu, 'resim': mediaUrl,'fiyat':fiyat});
 
     return YiyecekBilgi(isim: isim,fiyat: fiyat,gluten_durumu: gluten_durumu,kategori: kategori,stok_durumu: stok_durumu,resim:mediaUrl);
   }

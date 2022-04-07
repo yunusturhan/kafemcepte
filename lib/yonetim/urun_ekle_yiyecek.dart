@@ -203,14 +203,16 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
                   ),
                 ],
               ),
-              ElevatedButton(onPressed: (){
-                double para=double.parse("$secilenTL.$secilenKrs");
-                print("$para");
-              }, child: Text("Para çevir")),
-              ElevatedButton(onPressed: (){
-                double para=double.parse("$secilenTL.$secilenKrs");
-                _yiyecekEkleService.yiyecekEkle(_urunAdiController.text, secilenKategori!, durumStok, durumGluten, para, urunImage).then((value) => print("kayit tamam"));
-              }, child: Text("data"))
+              Center(
+                child: Container(
+                  width: 100,
+                  child: ElevatedButton(onPressed: (){
+                    double para=double.parse("$secilenTL.$secilenKrs");
+                    _yiyecekEkleService.yiyecekEkle(_urunAdiController.text, secilenKategori!, durumStok, durumGluten, para, urunImage).then((value) => print("kayit tamam"));
+                    Fluttertoast.showToast(msg: "Ürün Başarıyla Eklendi");
+                  }, child: Text("EKLE",style: TextStyle(color: Colors.white,fontSize: 20),)),
+                ),
+              ),
 
             ],
           ),

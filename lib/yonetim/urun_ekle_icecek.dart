@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kafemcepte/service/icecek_service.dart';
 class UrunEkleIcecekSayfasi extends StatefulWidget {
   const UrunEkleIcecekSayfasi({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _UrunEkleIcecekSayfasiState extends State<UrunEkleIcecekSayfasi> {
   ];
   String? secilenKategori,secilenTL,secilenKrs;
   bool durumStok=false,durumAlkol=false;
-
+  IcecekEkleService _icecekEkleService=IcecekEkleService();
 
 
 
@@ -188,6 +190,15 @@ class _UrunEkleIcecekSayfasiState extends State<UrunEkleIcecekSayfasi> {
                     },
                   ),
                 ],
+              ),Center(
+                child: Container(
+                  width: 100,
+                  child: ElevatedButton(onPressed: (){
+                    double para=double.parse("$secilenTL.$secilenKrs");
+                    _icecekEkleService.icecekEkle(_urunAdiController.text,secilenKategori!, durumStok, durumAlkol, para, urunImage);
+                     Fluttertoast.showToast(msg: "Ürün Başarıyla Eklendi");
+                  }, child: Text("EKLE",style: TextStyle(color: Colors.white,fontSize: 20),)),
+                ),
               ),
 
             ],

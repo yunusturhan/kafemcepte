@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class IcecekBilgi {
   String kategori, isim;
-  bool gluten_durumu, stok_durumu;
+  bool alkol_durumu, stok_durumu;
   double fiyat;
   String resim;
 
@@ -10,7 +10,7 @@ class IcecekBilgi {
       {
         required this.kategori,
         required this.isim,
-        required this.gluten_durumu,
+        required this.alkol_durumu,
         required this.stok_durumu,
         required this.fiyat, required this.resim});
 
@@ -18,7 +18,7 @@ class IcecekBilgi {
     return IcecekBilgi(
         kategori: snapshot["kategori"],
         isim: snapshot["isim"],
-        gluten_durumu: snapshot["gluten_durumu"],
+        alkol_durumu: snapshot["alkol_durumu"],
         stok_durumu: snapshot["stok_durumu"],
         fiyat: snapshot["fiyat"]
         ,

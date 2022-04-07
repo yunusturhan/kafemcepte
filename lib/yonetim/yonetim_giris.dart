@@ -66,7 +66,8 @@ class _YonetimGirisState extends State<YonetimGiris> {
                 ),
 
               ),
-            ),Row(
+            ),
+            Row(
               children: [
                 Expanded(child: ElevatedButton(onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>YonetimAnasayfa()));
