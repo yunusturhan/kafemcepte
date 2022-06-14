@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kafemcepte/diger_sayfalar/galeri.dart';
+import 'package:kafemcepte/diger_sayfalar/iletisim.dart';
 import 'package:kafemcepte/main.dart';
+import 'package:kafemcepte/service/auth_service.dart';
 import 'package:kafemcepte/yonetim/yonetim_giris.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -77,7 +81,7 @@ class _MyDrawerState extends State {
             title: Text('Galeri'),
             trailing: Icon(Icons.arrow_right),
             onTap: () {
-              Navigator.pushNamed(context, "/galeri");
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Galeri()));
             },
           ),
           ListTile(
@@ -85,16 +89,19 @@ class _MyDrawerState extends State {
             title: Text('İletişim'),
             trailing: Icon(Icons.arrow_right),
             onTap: () {
-              Navigator.pushNamed(context, "/iletisim");
+           //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>IletisimSayfasi()));
             },
           ),
+
           ListTile(
             leading: Icon(Icons.admin_panel_settings_outlined),
             title: Text('Yönetim'),
             trailing: Icon(Icons.arrow_right),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>YonetimGiris()));
-
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChangeNotifierProvider(
+                create: (_)=>AuthService(),
+                child: YonetimGiris(),
+              )));
             },
           ),
 

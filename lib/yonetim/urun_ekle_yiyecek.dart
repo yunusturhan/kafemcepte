@@ -1,11 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kafemcepte/service/yiyecek_service.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UrunEkleYiyecekSayfasi extends StatefulWidget {
   const UrunEkleYiyecekSayfasi({Key? key}) : super(key: key);
@@ -15,13 +14,13 @@ class UrunEkleYiyecekSayfasi extends StatefulWidget {
 }
 
 class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
-  final kategoriList=['Çorba','Makarna','Pizza','Hamburger','Tatlı'];
+  final kategoriList=['Çorba','Salata','Makarna','Pizza','Hamburger','Tatlı'];
   final fiyatTL=[
     for(int i=0;i<100;i++) "$i"
   ];
   String? secilenKategori,secilenTL,secilenKrs;
   bool durumStok=false,durumGluten=false;
-  YiyecekEkleService _yiyecekEkleService =YiyecekEkleService();
+  final YiyecekEkleService _yiyecekEkleService =YiyecekEkleService();
 
 
 
@@ -29,7 +28,8 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
   final ImagePicker _pickerImage = ImagePicker();
   dynamic _pickImage;
   var urunImage;
-  TextEditingController _urunAdiController= TextEditingController();
+  final TextEditingController _urunAdiController= TextEditingController();
+  final TextEditingController _urunAciklamaController=TextEditingController();
 
 
   Widget imagePlace(){
@@ -67,7 +67,6 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
   @override
   Widget build(BuildContext context) {
 
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text("YİYECEK EKLE",style: TextStyle(color: Colors.white),),),
@@ -75,20 +74,20 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: 15,right: 10),
+          padding: const EdgeInsets.only(left: 15,right: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Center(child: imagePlace(),),
               Row(crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,children: [
                   InkWell(
-                    child: Icon(Icons.camera_alt,size: 48,),onTap: ()=>_onImageButtonPressed(ImageSource.camera,context: context),
+                    child:const Icon(Icons.camera_alt,size: 48,),onTap: ()=>_onImageButtonPressed(ImageSource.camera,context: context),
                   ),
                   InkWell(
-                    child: Icon(Icons.image,size: 48,),onTap: ()=>_onImageButtonPressed(ImageSource.gallery,context: context),
+                    child: const Icon(Icons.image,size: 48,),onTap: ()=>_onImageButtonPressed(ImageSource.gallery,context: context),
                   )
                 ],),
 
@@ -109,11 +108,22 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
                     secilenKategori = newValue!;
                   });
                 },
-                hint: Text("Kategori Seçin"),
+                hint: const Text("Kategori Seçin"),
               ),
               TextField(
                 controller: _urunAdiController,
                 decoration: InputDecoration(hintText:"Ürün Adını girin",
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange.shade100,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              TextField(
+                controller: _urunAciklamaController,
+                decoration: InputDecoration(hintText:"Ürün Açıklaması girin",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.orange.shade100,
@@ -144,10 +154,10 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
                         secilenTL = newValue!;
                       });
                     },
-                    hint: Text("TL Seçin"),
+                    hint: const Text("TL Seçin"),
                   ),
-                  Text("₺",style: TextStyle(fontSize: 20),),
-                  SizedBox(width: 15,),
+                  const Text("₺",style: TextStyle(fontSize: 20),),
+                  const SizedBox(width: 15,),
                   DropdownButton(
                     //isExpanded: true,
                     value: secilenKrs,
@@ -165,20 +175,22 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
                         secilenKrs = newValue!;
                       });
                     },
-                    hint: Text("Kuruş Seçin"),
-                  ),Text("Kuruş"),
+                    hint: const Text("Kuruş Seçin"),
+                  ),const Text("Kuruş"),
                 ],
               ),
               Row(
                 children: [
-                  Text("Stok durumu : ",style: TextStyle(fontSize: 16),),
+                  const Text("Stok durumu : ",style: TextStyle(fontSize: 16),),
                   Switch(
                     activeColor: Colors.green,
                     inactiveTrackColor: Colors.red.shade300,
                     inactiveThumbColor: Colors.red,
                     value: durumStok,
                     onChanged: (value) {
-                      print("Stok Durumu : $value");
+                      if (kDebugMode) {
+                        print("Stok Durumu : $value");
+                      }
                       setState(() {
                         durumStok = value;
                       });
@@ -188,14 +200,14 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
               ),
               Row(
                 children: [
-                  Text("Gluten durumu : ",style: TextStyle(fontSize: 16),),
+                  const Text("Gluten durumu : ",style: TextStyle(fontSize: 16),),
                   Switch(
                     activeColor: Colors.green,
                     inactiveTrackColor: Colors.red.shade300,
                     inactiveThumbColor: Colors.red,
                     value: durumGluten,
                     onChanged: (value) {
-                      print("Gluten Durumu : $value");
+                      //print("Gluten Durumu : $value");
                       setState(() {
                         durumGluten = value;
                       });
@@ -204,13 +216,13 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
                 ],
               ),
               Center(
-                child: Container(
+                child: SizedBox(
                   width: 100,
                   child: ElevatedButton(onPressed: (){
                     double para=double.parse("$secilenTL.$secilenKrs");
-                    _yiyecekEkleService.yiyecekEkle(_urunAdiController.text, secilenKategori!, durumStok, durumGluten, para, urunImage).then((value) => print("kayit tamam"));
+                    _yiyecekEkleService.yiyecekEkle(_urunAdiController.text, secilenKategori!, durumStok, durumGluten,_urunAciklamaController.text, para, urunImage).then((value) => print("kayit tamam"));
                     Fluttertoast.showToast(msg: "Ürün Başarıyla Eklendi");
-                  }, child: Text("EKLE",style: TextStyle(color: Colors.white,fontSize: 20),)),
+                  }, child: const Text("EKLE",style:  TextStyle(color: Colors.white,fontSize: 20),)),
                 ),
               ),
 
@@ -229,13 +241,17 @@ class _UrunEkleYiyecekSayfasiState extends State<UrunEkleYiyecekSayfasi> {
       300,imageQuality: 50);
       setState(() {
         urunImage = pickedFile!;
-        print("dosyaya geldim: $urunImage");
+        if (kDebugMode) {
+          print("dosyaya geldim: $urunImage");
+        }
         if (urunImage != null) {}
       });
     } catch (e) {
       setState(() {
         _pickImage = e;
-        print("Image Error: " + _pickImage);
+        if (kDebugMode) {
+          print("Image Error: " + _pickImage);
+        }
       });
     }
   }

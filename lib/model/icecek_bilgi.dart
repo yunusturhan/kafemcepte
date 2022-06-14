@@ -5,6 +5,7 @@ class IcecekBilgi {
   bool alkol_durumu, stok_durumu;
   double fiyat;
   String resim;
+  String aciklama;
 
   IcecekBilgi(
       {
@@ -12,7 +13,9 @@ class IcecekBilgi {
         required this.isim,
         required this.alkol_durumu,
         required this.stok_durumu,
-        required this.fiyat, required this.resim});
+        required this.fiyat,
+        required this.aciklama,
+        required this.resim});
 
   factory IcecekBilgi.fromSnapshot(DocumentSnapshot snapshot) {
     return IcecekBilgi(
@@ -20,8 +23,8 @@ class IcecekBilgi {
         isim: snapshot["isim"],
         alkol_durumu: snapshot["alkol_durumu"],
         stok_durumu: snapshot["stok_durumu"],
-        fiyat: snapshot["fiyat"]
-        ,
+        fiyat: snapshot["fiyat"],
+        aciklama: snapshot["aciklama"],
         resim: snapshot["resim"]);
   }
 }

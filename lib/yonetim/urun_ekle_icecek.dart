@@ -11,7 +11,7 @@ class UrunEkleIcecekSayfasi extends StatefulWidget {
 }
 
 class _UrunEkleIcecekSayfasiState extends State<UrunEkleIcecekSayfasi> {
-  final kategoriList=['Çay','Meyve Suyu','Gazlı İçecek','Alkollü İçecek','Sıcak Kahve','Soğuk Kahve'];
+  final kategoriList=['Çay','Meyve Suyu','Gazlı İçecek','Alkollü İçecek','Kahve','Limonata'];
   final fiyatTL=[
     for(int i=0;i<100;i++) "$i"
   ];
@@ -25,6 +25,7 @@ class _UrunEkleIcecekSayfasiState extends State<UrunEkleIcecekSayfasi> {
   dynamic _pickImage;
   var urunImage;
   TextEditingController _urunAdiController= TextEditingController();
+  TextEditingController _urunAciklamaController=TextEditingController();
 
 
   Widget imagePlace(){
@@ -101,6 +102,19 @@ class _UrunEkleIcecekSayfasiState extends State<UrunEkleIcecekSayfasi> {
                 keyboardType: TextInputType.number,
                 controller: _urunAdiController,
                 decoration: InputDecoration(hintText:"İçecek Adını girin",
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange.shade100,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+
+                ),
+              ),
+              TextField(
+                keyboardType: TextInputType.number,
+                controller: _urunAciklamaController,
+                decoration: InputDecoration(hintText:"Açıklama girin",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.orange.shade100,
@@ -195,7 +209,7 @@ class _UrunEkleIcecekSayfasiState extends State<UrunEkleIcecekSayfasi> {
                   width: 100,
                   child: ElevatedButton(onPressed: (){
                     double para=double.parse("$secilenTL.$secilenKrs");
-                    _icecekEkleService.icecekEkle(_urunAdiController.text,secilenKategori!, durumStok, durumAlkol, para, urunImage);
+                    _icecekEkleService.icecekEkle(_urunAdiController.text,secilenKategori!, durumStok, durumAlkol, para,_urunAciklamaController.text, urunImage);
                      Fluttertoast.showToast(msg: "Ürün Başarıyla Eklendi");
                   }, child: Text("EKLE",style: TextStyle(color: Colors.white,fontSize: 20),)),
                 ),
